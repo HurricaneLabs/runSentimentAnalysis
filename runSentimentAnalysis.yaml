@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: First Production Release
+Resources:
+  runSentimentAnalysis:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python2.7
+      CodeUri: .
+      Description: First Production Release
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::YOUR_AWS_IAM_INFO:role/service-role/readS3'
+      Environment:
+        Variables:
+          splToken: SPLUNK_TOKEN_HERE
+          splServer: SPLUNK_HEC_URL_HERE
+      Tags:
+        'lambda-console:blueprint': s3-get-object-python
